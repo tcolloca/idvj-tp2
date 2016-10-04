@@ -17,9 +17,9 @@ public class EnemiesController : MonoBehaviour {
 		time += Time.deltaTime;
 		lastCreationTime += Time.deltaTime;
 		if ((int)time % 5 == 0 && lastCreationTime > 3) {
-			lastCreationTime = 0;
-			GameObject enemy = enemiesPooler.getObject ();
-			enemy.SetActive (true);
+			//lastCreationTime = 0;
+			//GameObject enemy = enemiesPooler.getObject ();
+			//enemy.SetActive (true);
 		}
 	}
 }
