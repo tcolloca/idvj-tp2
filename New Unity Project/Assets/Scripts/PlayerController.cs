@@ -8,10 +8,12 @@ public class PlayerController : MonoBehaviour {
     public GameController gameController;
 
     private Rigidbody rigidBody;
+    private LineRenderer lr;
 
     // Use this for initialization
     void Start () {
         rigidBody = GetComponent<Rigidbody>();
+        lr = GameObject.FindGameObjectWithTag("Line").GetComponent<LineRenderer>();
     }
 	
     void OnTriggerEnter(Collider collider)
@@ -27,6 +29,15 @@ public class PlayerController : MonoBehaviour {
 
 	// Update is called once per frame
 	void Update () {
+        lr.SetPosition(0, new Vector3(0, transform.position.y, 0));
+        lr.SetPosition(1, transform.position);
+
+        if (transform.position.y < -10)
+        {
+            gameController.PlayerDied();
+            Respawn();
+            return;
+        }
         float vertical = Input.GetAxis("Vertical");
         Vector3 toCenter = -rigidBody.position;
         float yVel = rigidBody.velocity.y;
@@ -38,5 +49,20 @@ public class PlayerController : MonoBehaviour {
         float horizontal = Input.GetAxis("Horizontal");
         Vector3 tangent = Quaternion.Euler(0, 90, 0) * toCenter;
         rigidBody.velocity += tangent * speed * horizontal * Time.deltaTime;
+    }
+
+    public void Respawn()
+    {
+        transform.position = new Vector3(0, 2, 0);
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.gameObject.tag.Equals("Enemy"))
+        {
+            collision.collider.attachedRigidbody.gameObject.SetActive(false);
+            Respawn();
+            gameController.PlayerDied();
+        }
     }
 }

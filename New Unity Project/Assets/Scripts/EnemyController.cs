@@ -3,32 +3,49 @@ using System.Collections;
 
 public class EnemyController : MonoBehaviour {
 
-	public float speed = 1f;
+    public static float speed = 2f;
 
 	private string playerTag = "Player";
 	private string boardTag = "Board";
 	private GameObject player;
-	private GameObject board;
 	private Rigidbody rigidBody;
+    private Vector3 playerPosition;
+    private Vector3 direction;
 
-	// Use this for initialization
-	void Start () {
-		board = GameObject.FindGameObjectWithTag (boardTag);
+    // Use this for initialization
+    void Start () {
 		player = GameObject.FindGameObjectWithTag (playerTag);
 		rigidBody = GetComponent<Rigidbody> ();
+        playerPosition = player.transform.position;
 	}
 	
 	// Update is called once per frame
 	void Update () {
-        Vector3 direction = player.transform.position - transform.position;
-        direction.Normalize();
-        rigidBody.velocity = direction * speed * Time.deltaTime;
-	}
+        if (transform.position.y < -10)
+        {
+            gameObject.SetActive(false);
+            return;
+        }
 
-	void OnCollisionEnter(Collision collision) {
-		if (collision.gameObject.Equals (board)) {
-			Vector3 direction = player.transform.position - transform.position;
-			//rigidBody.velocity = direction * speed;
-		}
-	}
+        float velY = rigidBody.velocity.y;
+        rigidBody.velocity = direction * speed + new Vector3(0, velY, 0);
+    }
+
+    public void SetPlayerPosition(Vector3 pos)
+    {
+        playerPosition = pos;
+        direction = playerPosition - transform.position;
+        direction.y = 0;
+        direction.Normalize();
+    }
+
+    void OnTriggerEnter(Collider collider)
+    {
+        Rigidbody attachedRigidbody = collider.attachedRigidbody;
+        string tag = attachedRigidbody.gameObject.tag;
+        if (tag.Equals("Coin"))
+        {
+            attachedRigidbody.gameObject.SetActive(false);
+        }
+    }
 }
