@@ -3,6 +3,7 @@ using System.Collections;
 
 public class EnemiesController : MonoBehaviour {
 
+	public float spawnFrequency = 20;
 	public GameObjectsPooler enemiesPooler; 
 
 	private float time = 0f;
@@ -16,10 +17,11 @@ public class EnemiesController : MonoBehaviour {
 	void Update () {
 		time += Time.deltaTime;
 		lastCreationTime += Time.deltaTime;
-		if ((int)time % 5 == 0 && lastCreationTime > 3) {
-			//lastCreationTime = 0;
-			//GameObject enemy = enemiesPooler.getObject ();
-			//enemy.SetActive (true);
+		if ((int)time % spawnFrequency == 0 && lastCreationTime > spawnFrequency) {
+			lastCreationTime = 0;
+			GameObject enemy = enemiesPooler.getObject ();
+			if (enemy == null) return;
+			enemy.SetActive (true);
 		}
 	}
 }

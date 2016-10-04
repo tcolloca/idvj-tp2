@@ -25,10 +25,10 @@ public class EnemyController : MonoBehaviour {
 	}
 
 	void OnCollisionEnter(Collision collision) {
-		//if (collision.gameObject.Equals (board)) {
-		//	Vector3 direction = player.transform.position - transform.position;
-		//	rigidBody.velocity = direction * speed;
-		//}
+		if (collision.gameObject.Equals (board)) {
+			Vector3 direction = player.transform.position - transform.position;
+			rigidBody.velocity = direction * speed;
+		}
 	}
 
 
