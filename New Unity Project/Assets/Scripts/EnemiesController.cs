@@ -8,10 +8,15 @@ public class EnemiesController : MonoBehaviour {
 
 	private float time = 0f;
 	private float lastCreationTime = 0;
+    private string boardTag = "Board";
+    private float boardWidth;
 
-	// Use this for initialization
-	void Start () {
-	}
+    // Use this for initialization
+    void Start () {
+        GameObject board = GameObject.FindGameObjectWithTag(boardTag);
+        Bounds boardBounds = board.GetComponent<MeshFilter>().mesh.bounds;
+        boardWidth = board.transform.localScale.x * boardBounds.size.x * 0.5f;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -21,7 +26,12 @@ public class EnemiesController : MonoBehaviour {
 			lastCreationTime = 0;
 			GameObject enemy = enemiesPooler.getObject ();
 			if (enemy == null) return;
-			enemy.SetActive (true);
+            float yPos = 1.5f;
+            float xPos = Random.Range(-boardWidth, boardWidth);
+            float zPos = Random.Range(-boardWidth, boardWidth);
+
+            enemy.transform.position = new Vector3(xPos, yPos, zPos);
+            enemy.SetActive (true);
 		}
 	}
 }
