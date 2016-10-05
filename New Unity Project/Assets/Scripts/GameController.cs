@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
 
-    public int playerLives = 5;
-    private int coinsPicked = 0;
+    public int playerLives;
 
+	public GameStats gameStats = new GameStats();
     private Text scoreText;
     private Text livesText;
 
@@ -14,21 +15,19 @@ public class GameController : MonoBehaviour {
     void Start () {
         scoreText = GameObject.FindGameObjectWithTag("Score").GetComponent<Text>();
         livesText = GameObject.FindGameObjectWithTag("Lives").GetComponent<Text>();
-        scoreText.text = coinsPicked + "";
+		scoreText.text = gameStats.coins + "";
         livesText.text = playerLives + "";
-
     }
 	
 	// Update is called once per frame
 	void Update () {
-	
+		gameStats.addTime ();
 	}
 
     public void CoinPicked()
     {
-        Debug.Log("Coin Picked!");
-        coinsPicked++;
-        scoreText.text = coinsPicked + "";
+		gameStats.addCoin ();
+		scoreText.text = gameStats.coins + "";
     }
 
     public void PlayerDied()
@@ -44,6 +43,9 @@ public class GameController : MonoBehaviour {
 
     private void GameOver()
     {
+		gameStats.gameOver ();
+		GeneralStats.instance.lastGameStats = gameStats;
+		SceneManager.LoadScene ("gameOver");
         //TODO: go to after-game scene or return to menu
     }
 }
