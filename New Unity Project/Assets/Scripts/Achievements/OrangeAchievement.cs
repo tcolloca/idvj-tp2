@@ -4,11 +4,11 @@ using System.Collections;
 public class OrangeAchievement : Achievement {
 
 	private static readonly int ID = Achievement.nextId();
-	private static readonly int totalCoins = 100;
+	private static readonly int totalCoins = 1;
 	private static readonly Sprite achieved = SpriteRepository.Get("orange");  
 	private static readonly Sprite notAchieved = SpriteRepository.Get("mysterious_ball");  
 
-	public OrangeAchievement() : base (achieved, notAchieved, "Orange Is the New Blue", 
+	public OrangeAchievement() : base (achieved, notAchieved, "Orange Is the New Green", 
 		string.Format("Collect a total of {0} coins.", totalCoins), 
 		string.Format("Collect a total of {0} coins.", totalCoins)) {
 		id = ID;

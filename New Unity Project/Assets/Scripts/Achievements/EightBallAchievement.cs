@@ -14,14 +14,14 @@ public class EightBallAchievement : Achievement {
 
 	// TODO
 	public override bool evaluate (GeneralStats generalStats) {
-		if (generalStats.lastGameStats.coins == 8) {
+		if (generalStats.lastGameStats.coins == 0) {
 			return true;
 		}
 		return false;
 	}
 
 	public override void effect() {
-		SkinsRepository.addSkin (new Skin(achieved, MaterialsRepository.Get ("8_ball")));
+		SkinsRepository.addSkin (new Skin(achieved, MaterialsRepository.Get ("eight_ball")));
 	}
 }
 

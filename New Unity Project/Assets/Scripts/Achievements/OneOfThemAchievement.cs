@@ -4,13 +4,13 @@ using System.Collections;
 public class OneOfThemAchievement : Achievement {
 
 	private static readonly int ID = Achievement.nextId();
-	private static readonly int totalEnemies = 100;
+	private static readonly int totalEnemies = 1;
 	private static readonly Sprite achieved = SpriteRepository.Get("red");  
 	private static readonly Sprite notAchieved = SpriteRepository.Get("mysterious_ball");  
 
 	public OneOfThemAchievement() : base (achieved, notAchieved, "One of Them", 
 		"Show them that you are better than them.", 
-		string.Format("Make {0} enemies fall into the abyss.", totalEnemies)) {
+		string.Format("Make a total of {0} enemies fall into the abyss.", totalEnemies)) {
 		id = ID;
 	}
 		
