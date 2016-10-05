@@ -25,7 +25,7 @@ public class FileManager : MonoBehaviour {
 			string line;
 			using (reader) {
 				int lineNum = 0;
-				GameStats gameStats = GameStats.instance;
+				GeneralStats gameStats = GeneralStats.instance;
 				while ((line = reader.ReadLine ()) != null) {
 					if (lineNum == 0) {
 						string[] values = line.Split (';');

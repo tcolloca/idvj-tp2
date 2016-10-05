@@ -1,28 +1,28 @@
 ﻿using UnityEngine;
 using System.Collections;
-using System.Collections.Generic;
 
-public class GameStats: MonoBehaviour {
+public class GameStats {
 
-	public static GameStats instance;
+	public int coins { get; private set;}
+	public int enemiesDefeated { get; private set;}
+	public float time { get; set;}
+	private bool isGameOver = false;
 
-	public int gamesPlayed { get; set; }
-	public int maxScore { get; set; }
-	public List<Achievement> achievements { get; private set; }
-
-	public void Awake() {
-		instance = this;
-		achievements = new List<Achievement> ();
-		addAchievements ();
-		DontDestroyOnLoad (this.gameObject);
+	public void addCoin() {
+		coins++;
 	}
 
-	public void addAchievements () {
-		addAchievement (null, "Lala", "LALALALALALA!");
-		addAchievement (null, "Puto", "PUATAAAAAAAAA!");
+	public void enemyDefeated() {
+		enemiesDefeated++;
 	}
 
-	private void addAchievement (Sprite image, string title, string description) {
-		achievements.Add (new Achievement(image, title, description));
+	public void addTime() {
+		if (!isGameOver) {
+			time += Time.deltaTime;
+		}
+	}
+
+	public void gameOver() {
+		isGameOver = true;
 	}
 }
