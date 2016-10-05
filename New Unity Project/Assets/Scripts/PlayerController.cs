@@ -4,16 +4,26 @@ using System.Collections;
 public class PlayerController : MonoBehaviour {
 
     public float speed = 25f;
+    public float godmodeDuration = 5f;
 
     public GameController gameController;
 
     private Rigidbody rigidBody;
     private LineRenderer lr;
 
+    private SphereCollider collider;
+    private float timeSinceRespawn;
+
+    private MeshRenderer godmodeRenderer;
+
     // Use this for initialization
     void Start () {
         rigidBody = GetComponent<Rigidbody>();
         lr = GameObject.FindGameObjectWithTag("Line").GetComponent<LineRenderer>();
+        collider = GetComponent<SphereCollider>();
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Enemies"), LayerMask.NameToLayer("Enemies"), true);
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Enemies"), LayerMask.NameToLayer("CenterObstacle"), true);
+        godmodeRenderer = GameObject.FindGameObjectWithTag("GodmodeSphere").GetComponent<MeshRenderer>();
     }
 	
     void OnTriggerEnter(Collider collider)
@@ -35,7 +45,7 @@ public class PlayerController : MonoBehaviour {
         if (transform.position.y < -10)
         {
             gameController.PlayerDied();
-            Respawn();
+            Die();
             return;
         }
         float vertical = Input.GetAxis("Vertical");
@@ -49,11 +59,26 @@ public class PlayerController : MonoBehaviour {
         float horizontal = Input.GetAxis("Horizontal");
         Vector3 tangent = Quaternion.Euler(0, 90, 0) * toCenter;
         rigidBody.velocity += tangent * speed * horizontal * Time.deltaTime;
+
+        if (godmodeRenderer.enabled && Time.realtimeSinceStartup - timeSinceRespawn >= godmodeDuration)
+        {
+            godmodeRenderer.enabled = false;
+                Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Enemies"), LayerMask.NameToLayer("Player"), false);
+        }
     }
 
-    public void Respawn()
+    public void Die()
     {
-        transform.position = new Vector3(0, 2, 0);
+        Respawn();
+        gameController.PlayerDied();
+        Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Enemies"), LayerMask.NameToLayer("Player"), true);
+        godmodeRenderer.enabled = true;
+    }
+
+    private void Respawn()
+    {
+        transform.position = new Vector3(6, 2, 0);
+        timeSinceRespawn = Time.realtimeSinceStartup;
     }
 
     void OnCollisionEnter(Collision collision)
@@ -61,8 +86,7 @@ public class PlayerController : MonoBehaviour {
         if (collision.collider.gameObject.tag.Equals("Enemy"))
         {
             collision.collider.attachedRigidbody.gameObject.SetActive(false);
-            Respawn();
-            gameController.PlayerDied();
+            Die();
         }
     }
 }

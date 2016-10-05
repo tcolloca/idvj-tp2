@@ -41,14 +41,4 @@ public class EnemyController : MonoBehaviour {
         direction.y = 0;
         direction.Normalize();
     }
-
-    void OnTriggerEnter(Collider collider)
-    {
-        Rigidbody attachedRigidbody = collider.attachedRigidbody;
-        string tag = attachedRigidbody.gameObject.tag;
-        if (tag.Equals("Coin"))
-        {
-            attachedRigidbody.gameObject.SetActive(false);
-        }
-    }
 }
