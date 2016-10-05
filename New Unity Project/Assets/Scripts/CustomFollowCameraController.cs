@@ -9,7 +9,6 @@ public class CustomFollowCameraController : MonoBehaviour {
     // Use this for initialization
     void Start () {
         camera = GetComponent<Camera>();
-        Debug.Log(camera);
         player = GameObject.FindGameObjectWithTag("Player");
 	}
 	

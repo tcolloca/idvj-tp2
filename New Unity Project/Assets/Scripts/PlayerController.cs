@@ -11,7 +11,6 @@ public class PlayerController : MonoBehaviour {
     private Rigidbody rigidBody;
     private LineRenderer lr;
 
-    private SphereCollider collider;
     private float timeSinceRespawn;
 
     private MeshRenderer godmodeRenderer;
@@ -20,7 +19,6 @@ public class PlayerController : MonoBehaviour {
     void Start () {
         rigidBody = GetComponent<Rigidbody>();
         lr = GameObject.FindGameObjectWithTag("Line").GetComponent<LineRenderer>();
-        collider = GetComponent<SphereCollider>();
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Enemies"), LayerMask.NameToLayer("Enemies"), true);
         Physics.IgnoreLayerCollision(LayerMask.NameToLayer("Enemies"), LayerMask.NameToLayer("CenterObstacle"), true);
         godmodeRenderer = GameObject.FindGameObjectWithTag("GodmodeSphere").GetComponent<MeshRenderer>();
