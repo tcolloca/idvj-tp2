@@ -18,7 +18,7 @@ public class SpriteRepository {
 		}
 	}
 
-     public static Sprite Get(string name) {
+	public static Sprite Get(string name) {
 		Sprite sprite = null;
 		dict.TryGetValue(name, out sprite);
 		return sprite;

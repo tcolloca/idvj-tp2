@@ -3,6 +3,9 @@ using System.Collections;
 
 public abstract class Achievement {
 
+	private static int lastId = 0;
+
+	public int id { get; set; }
 	public Sprite achievedImage { get; private set; }
 	public Sprite notAchievedImage { get; private set; }
 	public string title { get; private set; }
@@ -23,5 +26,12 @@ public abstract class Achievement {
 
 	public void achieve() {
 		isAchieved = true;
+		effect ();
+	}
+
+	public abstract void effect ();
+
+	public static int nextId() {
+		return lastId++;
 	}
 }
