@@ -28,11 +28,10 @@ public class AchievementsController : MonoBehaviour {
 					if (achievement.isAchieved) {
 						child.GetComponent<Text>().text = achievement.description;
 					} else {
-						child.GetComponent<Text>().text = achievement.hint;
+						child.GetComponent<Text>().text = "Hint: " + achievement.hint;
 					}
 				}
 			}
-			achievementObj.SetActive (true);
 			achievementObj.transform.SetParent (transform);
 		}
 	}

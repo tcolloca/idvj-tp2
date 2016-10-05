@@ -14,11 +14,15 @@ public class MenuController : MonoBehaviour {
 	
 	}
 
-	public void Play() {
+	public void Play () {
 		SceneManager.LoadScene ("game");
 	}
 
-	public void Achievements() {
+	public void Achievements () {
 		SceneManager.LoadScene ("achievements");
+	}
+
+	public void Customize () {
+		SceneManager.LoadScene ("customize");
 	}
 }
