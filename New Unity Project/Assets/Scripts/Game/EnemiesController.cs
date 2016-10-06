@@ -11,6 +11,8 @@ public class EnemiesController : MonoBehaviour {
     private string boardTag = "Board";
     private float boardWidth;
     private GameObject player;
+    private float lastUpdateTime;
+    private float timeBetweenUpdates = 3f;
 
     // Use this for initialization
     void Start () {
@@ -24,8 +26,11 @@ public class EnemiesController : MonoBehaviour {
 	void Update () {
 		time += Time.deltaTime;
 		lastCreationTime += Time.deltaTime;
-		if (lastCreationTime > spawnFrequency) {
-			lastCreationTime = 0;
+
+        if ((Time.realtimeSinceStartup - lastUpdateTime) > timeBetweenUpdates)
+        {
+            timeBetweenUpdates += 0.1f;
+            lastUpdateTime = Time.realtimeSinceStartup;
             if (spawnFrequency > 0.46f)
             {
                 spawnFrequency = spawnFrequency - 0.2f;
@@ -34,6 +39,10 @@ public class EnemiesController : MonoBehaviour {
             {
                 EnemyController.speed = EnemyController.speed + 0.4f;
             }
+        }
+
+		if (lastCreationTime > spawnFrequency) {
+			lastCreationTime = 0;
             GameObject enemy = enemiesPooler.getObject ();
 			if (enemy == null) return;
             Vector3 newPos = new Vector3(Random.Range(-boardWidth, boardWidth), 1.5f, Random.Range(-boardWidth, boardWidth));

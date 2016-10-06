@@ -20,6 +20,7 @@ public class GameController : MonoBehaviour {
 		scoreText.text = gameStats.coins + "";
         livesText.text = playerLives + "";
 		bestScoreText.text = "Best Score: " + GeneralStats.instance.maxCoins;
+        EnemyController.speed = 2f;
     }
 	
 	// Update is called once per frame
