@@ -4,7 +4,7 @@ using System.Collections;
 public class BlueAchievement : Achievement {
 
 	private static readonly int ID = Achievement.nextId();
-	private static readonly int time = 10;
+	private static readonly int time = 220;
 	private static readonly Sprite achieved = SpriteRepository.Get("blue");  
 	private static readonly Sprite notAchieved = SpriteRepository.Get("mysterious_ball");  
 

@@ -4,7 +4,7 @@ using System.Collections;
 public class LavaAchievement : Achievement {
 
 	private static readonly int ID = Achievement.nextId();
-	private static readonly int coins = 3;
+	private static readonly int coins = 50;
 	private static readonly Sprite achieved = SpriteRepository.Get("lava");  
 	private static readonly Sprite notAchieved = SpriteRepository.Get("mysterious_ball");  
 

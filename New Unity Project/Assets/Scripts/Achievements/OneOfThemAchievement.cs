@@ -4,7 +4,7 @@ using System.Collections;
 public class OneOfThemAchievement : Achievement {
 
 	private static readonly int ID = Achievement.nextId();
-	private static readonly int totalEnemies = 1;
+	private static readonly int totalEnemies = 1000;
 	private static readonly Sprite achieved = SpriteRepository.Get("red");  
 	private static readonly Sprite notAchieved = SpriteRepository.Get("mysterious_ball");  
 
