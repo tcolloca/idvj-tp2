@@ -31,11 +31,11 @@ public class EnemiesController : MonoBehaviour {
         {
             timeBetweenUpdates += 0.1f;
             lastUpdateTime = Time.realtimeSinceStartup;
-            if (spawnFrequency > 0.46f)
+            if (spawnFrequency > 0.5f)
             {
                 spawnFrequency = spawnFrequency - 0.2f;
             }
-            if (EnemyController.speed < 17f)
+            if (EnemyController.speed < 15f)
             {
                 EnemyController.speed = EnemyController.speed + 0.4f;
             }
