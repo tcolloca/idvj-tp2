@@ -4,7 +4,7 @@ using System.Collections;
 public class StonesAchievement : Achievement {
 
 	private static readonly int ID = Achievement.nextId();
-	private static readonly int totalEnemies = 2;
+	private static readonly int totalEnemies = 300;
 	private static readonly Sprite achieved = SpriteRepository.Get("stone");  
 	private static readonly Sprite notAchieved = SpriteRepository.Get("mysterious_ball");  
 

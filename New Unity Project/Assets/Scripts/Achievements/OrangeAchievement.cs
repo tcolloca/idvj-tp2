@@ -4,7 +4,7 @@ using System.Collections;
 public class OrangeAchievement : Achievement {
 
 	private static readonly int ID = Achievement.nextId();
-	private static readonly int totalCoins = 1;
+	private static readonly int totalCoins = 100;
 	private static readonly Sprite achieved = SpriteRepository.Get("orange");  
 	private static readonly Sprite notAchieved = SpriteRepository.Get("mysterious_ball");  
 
